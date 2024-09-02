@@ -1,10 +1,10 @@
 # JANUS Artifact Appendix
 
-Paper title: **Enter the title of your paper here**
+Paper title: **Janus: Fast Privacy-Preserving Data Provenance For TLS**
 
-Artifacts HotCRP Id: **#Enter your HotCRP Id here** (not your paper Id, but the artifacts id)
+Artifacts HotCRP Id: **#2** (not your paper Id, but the artifacts id)
 
-Requested Badge: Either **Available**, **Functional**, or **Reproduced**
+Requested Badge: **Available**, **Functional**, and **Reproduced**
 
 ## Description
 A short description of your artifact and how it links to your paper.
@@ -18,9 +18,9 @@ In addition, you should highlight any ethical concerns regarding your artifacts 
 Describe the minimal hardware and software requirements of your artifact and estimate the compute time and storage required to run the artifact.
 
 ### Hardware Requirements
-If your artifact requires specific hardware to be executed, mention that here.
-Provide instructions on how a reviewer can gain access to that hardware through remote access, buying or renting, or even emulating the hardware.
-Make sure to preserve the anonymity of the reviewer at any time.
+This work does not require any specific hardware to reproduce the results.
+We used a MacBook Pro 16-inch (2021) configured with an Apple M1 Pro chip and 32 GB of RAM.
+
 
 ### Software Requirements
 Describe the OS and software packages required to evaluate your artifact.
