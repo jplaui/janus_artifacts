@@ -74,7 +74,6 @@ To download each of the building blocks, make sure to download the following lis
 In order to run the zkSNARK circuits, `cd` into the folder `circuits_janus/gnark_zkp` and run `go mod init gnark_zkp` as well as `go mod tidy`.
 - (Deco reimplementation) run `git clone https://github.com/jplaui/decoTls12MtE.git`, then `cd` into the folder and run the script `./install.sh`. Next, run the command `docker build -t deco .` to build the Docker image. 
 - (Origo reproduction, Janus ECTF, Janus Threeparty handshake) run the command `git clone https://github.com/jplaui/origo.git`, next `cd` into the folder `origo` and run the local installation git submodule commands provided [here](https://github.com/jplaui/origo/blob/main/docs/01_installation.md#locally-running-the-repo).
-For accessing the threeparty handshake in the proxy mode, make sure to pull the repository and switch to the branch `threephs` with the command `git clone https://github.com/jplaui/origo.git --branch threephs`.
 - (DiStefano reproduction) run the command `git clone https://github.com/brave-experiments/DiStefano` and follow the installation instructions on [this page](https://github.com/brave-experiments/DiStefano/blob/main/src/README.md). Make sure to run the command `cmake ../ -DBENCHMARKING=ON`.
 - (TLSnotary reproduction) run the command `git clone https://github.com/tlsnotary/tlsn.git` and follow the installation instructions [here](https://docs.tlsnotary.org/quick_start/rust.html#notarizing-private-information-discord-message)
 - (TLS scanner) run `git clone https://github.com/TeoLj/TLSscanner.git` and follow the [installation instructions](https://github.com/TeoLj/TLSscanner?tab=readme-ov-file#installation).
@@ -105,11 +104,11 @@ The experiments 4 and 5 support this claim.
 
 #### Main Result 2: Janus end-to-end performance
 Our results of Table 4 indicate that Janus can prove private TLS data of kilobyte sizes in seconds (post record computation). Further, we show how Janus behaves (practical in handshake phase and partly improved record phase, most efficient post-record phase) compared to related open-source tools for data provenance verification.
-The experiments 1, 2, 3, 4, 5, 7, and 8 contribute to this claim.
+The experiments 1, 2, 3, 4, 5, and 7 contribute to this claim.
 
 #### Main Result 3: Janus 2PC building blocks
 We show that Janus secure computation building blocks are practical as stated via Table 7.
-The experiments 4,7, and 8 support this claim.
+The experiments 4 and 7 support this claim.
 
 #### Side Result 4: Current TLS cipher suite landscape
 We show that today's TLS 1.3 support is very close to today's TLS 1.2 support in Figure 13.
@@ -272,15 +271,14 @@ The results supports our claims made in our minor result 4.
 
 #### Experiment 7: Janus ECTF, Origo benchmarks
 In order to run the ECTF algorithm and get the Origo reproduction, you must launch three terminal sessions. Jump with each of the terminal session into the folders `origo/server`, `origo/proxy`, `origo/client` and now start in the server location with the command `go run main.go -debug`. Next run the proxy (location inside `origo/proxy`) with the command `go run main.go -listen` and run the client (location inside `origo/client`) with the command `go run main.go -debug -request`.
-After the client command, the code executes the ECTF algorithm and outputs the bandwidth and execution time benchmarks (see [code](https://github.com/jplaui/tls_fork/blob/88b41e47f1e91b83b63ab04e4b9d9df11fbc92df/new_ectf.go#L313)). 
+After the client command, the code executes the threeparty handshake and the ECTF algorithm and outputs the bandwidth and execution time benchmarks (see [code](https://github.com/jplaui/tls_fork/blob/88b41e47f1e91b83b63ab04e4b9d9df11fbc92df/new_ectf.go#L313)). 
 In order to get the Origo end to end benchmarks, continue the execution of the command sequence provided [here](https://github.com/jplaui/origo/tree/main?tab=readme-ov-file#running-the-protocol-locally). You already did step 3. at this point.
 This experiment does not take long and has no drastic consumption of system resources.
 The results supports our claims made in our main result 2 and contribute to the main result 3.
 
-#### Experiment 8: Janus three party handshake
-In order to run the three-party handshake, make sure to be on the right branch and follow the execution requirements provided above in experiment 7 until step 3, where the client calls `go run main.go -debug -request`.
-This experiment does not take long and has no drastic consumption of system resources.
-The results supports our claims made in our main result 2.
+Notice that this experiment also executes the threeparty handshake, where the [makeClientHello](https://github.com/jplaui/tls_fork/blob/client/handshake_client.go#L151) function adds a new keyshare which is supposed to be generated at the proxy.
+Further, we generate the secret shared client DHE [here](https://github.com/jplaui/tls_fork/blob/client/handshake_client_tls13.go#L395).
+The 3PHS is executed locally and the code snipped provided here does not run the randomness addition to the tls_fork branch of the proxy.
 
 
 ## Limitations (Only for Functional and Reproduced badges)
