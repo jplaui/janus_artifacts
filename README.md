@@ -283,6 +283,7 @@ The 3PHS is executed locally and the code snipped provided here does not run the
 
 ## Limitations (Only for Functional and Reproduced badges)
 We do not provide a full end-to-end implementation of Janus yet due to the fact that our ongoing work of integrating Janus into the browser might require additional unknown changes/removals of the our main code structure.
+However, as promised in the paper, we open-source all secure computation building blocks.
 
 ## Notes on Reusability (Only for Functional and Reproduced badges)
 Our building blocks or sub parts can be reused to compose different types of secure channel protocols. For instance, we extract our ECTF algorithm and at the same time show how it is used in the crypto/tls Golang standard package.
